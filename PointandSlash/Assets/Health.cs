@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public float health = 5f;
+    public float maxHealth = 5f;
+    public float health;
+
+    private void Start()
+    {
+        health = maxHealth;
+    }
 
     public void TakeDamage(int damage)
     {

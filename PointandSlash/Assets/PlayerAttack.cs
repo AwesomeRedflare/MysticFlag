@@ -4,39 +4,38 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private float timeBtwAttack;
-    public float startTimeBtwAttack;
+    private float nextAttackTime = 0f;
+    public float attackRate;
 
     public Transform attackPos;
     public LayerMask enemyLayer;
     public float attackRange;
     public int damage;
 
-
-    void Start()
-    {
-        
-    }
-
-
     void Update()
     {
-        if(timeBtwAttack <= 0)
-        {
-            timeBtwAttack = startTimeBtwAttack;
 
-            if (Input.GetKey(KeyCode.Space))
+        if(Time.time >= nextAttackTime)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemyLayer);
-                for (int i = 0; i < enemiesToDamage.Length; i++)
-                {
-                    enemiesToDamage[i].GetComponent<Health>().TakeDamage(damage);
-                }
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-        else
+    }
+
+    void Attack()
+    {
+        //to do play animation refer to brackeys video
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemyLayer);
+
+        foreach (Collider2D enemy in hitEnemies)
         {
-            timeBtwAttack -= Time.deltaTime;
+            Debug.Log("We hit " + enemy.name);
+
+            enemy.GetComponent<Health>().TakeDamage(damage);
         }
     }
 

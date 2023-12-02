@@ -4,38 +4,28 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Camera cam;
-
     private Rigidbody2D rb;
-    public float moveSpeed = 5f;
-    private Vector3 target;
-
+    public float speed = 5f;
+    public Transform target;
+    public Camera cam;
+    private float angle;
+    private Vector2 direction;
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        target = transform.position;
+        cam = FindObjectOfType<Camera>();
     }
 
     void Update()
     {
         // Code to move to mouse position
-        if (Input.GetMouseButtonDown(0))
-        {
-            target = cam.ScreenToWorldPoint(Input.mousePosition);
-            target.z = transform.position.z;
-        }
-        transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
-        // Code to face mouse
-        Vector2 direction = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        direction = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         transform.rotation = rotation;
-    }
-
-    private void FixedUpdate()
-    {
 
     }
 }
