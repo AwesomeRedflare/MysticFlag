@@ -16,6 +16,11 @@ public class Magic : MonoBehaviour
     private float targetMana;
     public float speed;
 
+    private void Start()
+    {
+        manaAmount = maxMana;
+    }
+
     private void OnEnable()
     {
         manaAmount = maxMana;
