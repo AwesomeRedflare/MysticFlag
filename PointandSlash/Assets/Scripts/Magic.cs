@@ -11,6 +11,7 @@ public class Magic : MonoBehaviour
     public float maxMana;
     public float manaAmount;
     public float manaCost;
+    public float attackAmount;
 
     public Image manaBar;
     private float targetMana;
@@ -27,7 +28,9 @@ public class Magic : MonoBehaviour
         {
             manaAmount = manaAmount - manaCost;
 
-            Instantiate(fireBall, spawnPoint.position, transform.rotation);
+            GameObject projectile = Instantiate(fireBall, spawnPoint.position, transform.rotation).gameObject;
+            projectile.GetComponent<FireBall>().damage = attackAmount;
+
         }
 
         manaBar.fillAmount = targetMana / maxMana;

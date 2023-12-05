@@ -6,6 +6,7 @@ public class FireBall : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float speed;
+    public float damage;
 
     private void Start()
     {
@@ -17,8 +18,16 @@ public class FireBall : MonoBehaviour
         rb.velocity = transform.up * speed * Time.fixedDeltaTime;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        Destroy(gameObject);
+        if (col.gameObject.CompareTag("Enemy"))
+        {
+            col.gameObject.GetComponent<Health>().TakeDamage((int)damage);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

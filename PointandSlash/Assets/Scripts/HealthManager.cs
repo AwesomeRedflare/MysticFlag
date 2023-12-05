@@ -20,11 +20,6 @@ public class HealthManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            health.TakeDamage(20);
-        }
-
         healthBar.fillAmount = targetHealth / health.maxHealth;
         targetHealth = Mathf.Lerp(targetHealth, health.health, speed * Time.deltaTime);
     }

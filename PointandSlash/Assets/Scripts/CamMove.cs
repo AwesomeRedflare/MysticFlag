@@ -15,7 +15,7 @@ public class CamMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player.position != null)
+        if(player != null)
         {
             transform.position = new Vector3(player.position.x, player.position.y, -10);
         }

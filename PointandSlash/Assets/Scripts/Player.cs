@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private Health health;
+    private Magic magic;
+    private Camera cam;
+    public Rigidbody2D rb;
+
     //base variables
-    private Rigidbody2D rb;
     public float speed = 5f;
     public Transform target;
-    public Camera cam;
     private float angle;
     private Vector2 direction;
 
@@ -20,11 +23,21 @@ public class Player : MonoBehaviour
     public float dashTime;
     public float dashLenght;
 
+    //invicibility frames
+    public bool canBeHurt = true;
+    public float damageTime;
+    public float damageTimeStart;
+
+    //Respawning
+    public Transform spawnPoint;
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         cam = FindObjectOfType<Camera>();
+        health = GetComponent<Health>();
+        magic = GetComponent<Magic>();
+        target.position = transform.position;
     }
 
     void Update()
@@ -62,11 +75,49 @@ public class Player : MonoBehaviour
             timeBtwDash -= Time.deltaTime;
         }
 
+        if(canBeHurt == false)
+        {
+            damageTime -= Time.deltaTime;
+
+            if(damageTime <= 0)
+            {
+                canBeHurt = true;
+            }
+        }
+
     }
 
     void StopDash()
     {
         isDashing = false;
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("GameOver");
+        health.health = health.maxHealth;
+        magic.manaAmount = magic.maxMana;
+        transform.position = spawnPoint.position;
+        target.position = spawnPoint.position;
+    }
+
+    /*
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Enemy") && canBeHurt == true)
+        {
+            health.TakeDamage(20);
+
+            canBeHurt = false;
+            damageTime = damageTimeStart;
+        }
+    }
+    */
+
+    public void SetInvicibility()
+    {
+        canBeHurt = false;
+        damageTime = damageTimeStart;
     }
 
     private void OnTriggerStay2D(Collider2D col)

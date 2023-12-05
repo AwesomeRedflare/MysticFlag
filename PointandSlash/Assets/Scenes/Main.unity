@@ -514,9 +514,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -537,12 +537,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   target: {fileID: 1361729052}
-  cam: {fileID: 519420031}
   canDash: 0
   isDashing: 0
   speedMultiplier: 2
   dashTime: 10
   dashLenght: 2
+  canBeHurt: 1
+  damageTime: 0
+  damageTimeStart: 2
+  spawnPoint: {fileID: 397571821}
 --- !u!4 &356453949
 Transform:
   m_ObjectHideFlags: 0
@@ -607,6 +610,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 100
+  Death:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 356453948}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: GameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &356453953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,8 +642,40 @@ MonoBehaviour:
   maxMana: 100
   manaAmount: 0
   manaCost: 25
+  attackAmount: 25
   manaBar: {fileID: 1772413092}
   speed: 5
+--- !u!1 &397571820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 397571821}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &397571821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397571820}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.27, y: -2.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,8 +1179,9 @@ GameObject:
   - component: {fileID: 1215579410}
   - component: {fileID: 1215579409}
   - component: {fileID: 1215579412}
+  - component: {fileID: 1215579413}
   m_Layer: 6
-  m_Name: Enemy
+  m_Name: Jelly enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1174,15 +1225,15 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000
+  m_Mass: 50
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!4 &1215579411
 Transform:
   m_ObjectHideFlags: 0
@@ -1191,7 +1242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215579408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.396, y: 0.108, z: 0}
+  m_LocalPosition: {x: 10.38, y: 0.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1211,8 +1262,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e26756b2e1e044a97b33276bf62a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 100
   health: 5
+  Death:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1215579413}
+        m_TargetAssemblyTypeName: JellyBehavior, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1215579413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215579408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3d00a9b536442429ca4fc2d6d9ddc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 600
+  attackDamage: 10
+  range: 10
+  startTimeBtwAttack: 3
+  isAttacking: 0
+  attackLenght: 2
 --- !u!1 &1220910916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1671,6 +1755,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 0
+  Death:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1497568950
 GameObject:
   m_ObjectHideFlags: 0
@@ -2164,7 +2251,7 @@ GameObject:
   - component: {fileID: 1856182471}
   - component: {fileID: 1856182472}
   m_Layer: 0
-  m_Name: playerbody
+  m_Name: enemybody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

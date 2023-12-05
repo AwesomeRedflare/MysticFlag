@@ -10,7 +10,6 @@ public class MousePos : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform.position;
         cam = FindObjectOfType<Camera>();
     }
 
@@ -21,7 +20,8 @@ public class MousePos : MonoBehaviour
         {
             target = cam.ScreenToWorldPoint(Input.mousePosition);
             target.z = transform.position.z;
+            transform.position = target;
         }
-        transform.position = target;
+
     }
 }
