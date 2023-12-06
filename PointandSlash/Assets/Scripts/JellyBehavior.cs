@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class JellyBehavior : MonoBehaviour
 {
+    private Enemy enemy;
     private GameObject player;
     private Rigidbody2D rb;
 
     public float speed;
-    public float attackDamage;
 
     private bool inRange = false;
     public float range;
@@ -24,6 +24,7 @@ public class JellyBehavior : MonoBehaviour
 
     private void Start()
     {
+        enemy = GetComponent<Enemy>();
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         timeBtwAttack = startTimeBtwAttack;
@@ -104,7 +105,7 @@ public class JellyBehavior : MonoBehaviour
 
             if(pla.canBeHurt == true)
             {
-                col.gameObject.GetComponent<Health>().TakeDamage((int)attackDamage);
+                col.gameObject.GetComponent<Health>().TakeDamage((int)enemy.attackDamage);
             }
             pla.rb.velocity = Vector2.zero;
 

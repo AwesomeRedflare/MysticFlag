@@ -48,6 +48,11 @@ public class Player : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            rb.velocity = Vector2.zero;
+        }
+
         // Code to face player to mouse
         direction = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -65,7 +70,6 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.C))
             {
                 timeBtwDash = dashTime;
-                Debug.Log("check speed");
                 isDashing = true;
                 Invoke("StopDash", dashLenght);
             }
@@ -101,23 +105,20 @@ public class Player : MonoBehaviour
         target.position = spawnPoint.position;
     }
 
-    /*
+
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Enemy") && canBeHurt == true)
-        {
-            health.TakeDamage(20);
-
-            canBeHurt = false;
-            damageTime = damageTimeStart;
-        }
+        
     }
-    */
+
 
     public void SetInvicibility()
     {
-        canBeHurt = false;
-        damageTime = damageTimeStart;
+        if(damageTime <= 0)
+        {
+            canBeHurt = false;
+            damageTime = damageTimeStart;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D col)
