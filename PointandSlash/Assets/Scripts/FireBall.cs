@@ -7,6 +7,7 @@ public class FireBall : MonoBehaviour
     private Rigidbody2D rb;
     public float speed;
     public float damage;
+    public string attackee;
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class FireBall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Enemy"))
+        if (col.gameObject.CompareTag(attackee))
         {
             col.gameObject.GetComponent<Health>().TakeDamage((int)damage);
             Destroy(gameObject);

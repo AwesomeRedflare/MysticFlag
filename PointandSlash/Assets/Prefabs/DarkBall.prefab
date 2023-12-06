@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5139530505793506930}
   - component: {fileID: 5139530505793506931}
   - component: {fileID: 5139530505793506929}
-  m_Layer: 7
-  m_Name: FireBall
+  m_Layer: 10
+  m_Name: DarkBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: e2566d28eca20514fb30ba3c77ba606f, type: 3}
-  m_Color: {r: 1, g: 0.49574798, b: 0, a: 1}
+  m_Color: {r: 0.26388645, g: 0.13176396, b: 0.4433962, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -136,6 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31db2863b69e49440b43bb0ed3380c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
-  damage: 0
-  attackee: Enemy
+  speed: 700
+  damage: 20
+  attackee: Player
