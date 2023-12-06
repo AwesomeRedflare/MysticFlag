@@ -29,13 +29,16 @@ public class NPC : MonoBehaviour
             chatName = GameObject.FindGameObjectWithTag("Name").GetComponent<TextMeshProUGUI>();
         }
         chatName.text = name;
+    }
 
-        chat.gameObject.transform.parent.transform.position = new Vector2(chat.gameObject.transform.parent.transform.position.x, 60);
+    public void StopSpeak(GameObject box)
+    {
 
     }
 
-    public void StopSpeak()
+    public void NPCDeath()
     {
-        chat.gameObject.transform.parent.transform.position = new Vector2(chat.gameObject.transform.parent.transform.position.x, -300);
+        Debug.Log("AAAAAAAAAAAAAA");
+        Destroy(gameObject);
     }
 }

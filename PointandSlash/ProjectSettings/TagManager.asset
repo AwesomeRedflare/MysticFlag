@@ -9,6 +9,7 @@ TagManager:
   - NPC
   - Enemy
   - Gold
+  - Heart
   layers:
   - Default
   - TransparentFX

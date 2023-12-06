@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameObject chatBox;
     private Health health;
     private Magic magic;
     private Camera cam;
@@ -30,6 +31,12 @@ public class Player : MonoBehaviour
 
     //Respawning
     public Transform spawnPoint;
+
+    //Expierence
+    public int expAmount;
+
+    //HeartPickup
+    public int heartValue;
 
     void Start()
     {
@@ -108,7 +115,11 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        
+        if (col.transform.CompareTag("Heart"))
+        {
+            health.HealHealth(heartValue);
+            Destroy(col.gameObject);
+        }
     }
 
 
@@ -121,10 +132,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("NPC") == true)
         {
+            chatBox.SetActive(true);
             col.GetComponent<NPC>().Speak();
         }
     }
@@ -133,7 +145,8 @@ public class Player : MonoBehaviour
     {
         if (col.CompareTag("NPC") == true)
         {
-            col.GetComponent<NPC>().StopSpeak();
+            //col.GetComponent<NPC>().StopSpeak();
+            chatBox.SetActive(false);
         }
     }
 }
