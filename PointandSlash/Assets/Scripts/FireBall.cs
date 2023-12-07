@@ -23,7 +23,14 @@ public class FireBall : MonoBehaviour
     {
         if (col.gameObject.CompareTag(attackee))
         {
-            col.gameObject.GetComponent<Health>().TakeDamage((int)damage);
+            if(attackee == "Player")
+            {
+                col.gameObject.GetComponent<Player>().SetInvicibility((int)damage);
+            }
+            else
+            {
+                col.gameObject.GetComponent<Health>().TakeDamage((int)damage);
+            }
             Destroy(gameObject);
         }
         else

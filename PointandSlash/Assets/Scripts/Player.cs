@@ -7,8 +7,10 @@ public class Player : MonoBehaviour
     public GameObject chatBox;
     private Health health;
     private Magic magic;
+    private Dash dash;
     private Camera cam;
     public Rigidbody2D rb;
+    public Transform pivot;
 
     //base variables
     public float speed = 5f;
@@ -17,12 +19,7 @@ public class Player : MonoBehaviour
     private Vector2 direction;
 
     //dash variables;
-    public bool canDash = false;
     public bool isDashing = false;
-    public float speedMultiplier;
-    private float timeBtwDash;
-    public float dashTime;
-    public float dashLenght;
 
     //invicibility frames
     public bool canBeHurt = true;
@@ -44,13 +41,14 @@ public class Player : MonoBehaviour
         cam = FindObjectOfType<Camera>();
         health = GetComponent<Health>();
         magic = GetComponent<Magic>();
+        dash = GetComponent<Dash>();
         target.position = transform.position;
     }
 
     void Update()
     {
         // Code to move player
-        if(isDashing == false || canDash == false)
+        if(isDashing == false)
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
@@ -64,28 +62,15 @@ public class Player : MonoBehaviour
         direction = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-        transform.rotation = rotation;
+        pivot.rotation = rotation;
 
         //Dashing
-        if (isDashing == true && canDash == true)
+        if (isDashing == true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * speedMultiplier * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * dash.speedMultiplier * Time.deltaTime);
         }
 
-        if(timeBtwDash <= 0 && canDash == true)
-        {
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                timeBtwDash = dashTime;
-                isDashing = true;
-                Invoke("StopDash", dashLenght);
-            }
-        }
-        else
-        {
-            timeBtwDash -= Time.deltaTime;
-        }
-
+        //Invibility logic or something
         if(canBeHurt == false)
         {
             damageTime -= Time.deltaTime;
@@ -120,11 +105,22 @@ public class Player : MonoBehaviour
             health.HealHealth(heartValue);
             Destroy(col.gameObject);
         }
+
+        if (col.transform.CompareTag("Wall"))
+        {
+            target.position = transform.position;
+        }
     }
 
 
-    public void SetInvicibility()
+    public void SetInvicibility(int damage)
     {
+        if(canBeHurt == true)
+        {
+            health.TakeDamage(damage);
+        }
+        rb.velocity = Vector2.zero;
+
         if(damageTime <= 0)
         {
             canBeHurt = false;

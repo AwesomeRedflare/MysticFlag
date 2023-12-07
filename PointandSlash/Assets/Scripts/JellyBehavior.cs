@@ -98,13 +98,7 @@ public class JellyBehavior : MonoBehaviour
         {
             Player pla = col.gameObject.GetComponent<Player>();
 
-            if(pla.canBeHurt == true)
-            {
-                col.gameObject.GetComponent<Health>().TakeDamage((int)enemy.attackDamage);
-            }
-            pla.rb.velocity = Vector2.zero;
-
-            pla.SetInvicibility();
+            pla.SetInvicibility((int)enemy.attackDamage);
         }
     }
 

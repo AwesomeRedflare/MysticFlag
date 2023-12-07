@@ -13,7 +13,6 @@ public class Health : MonoBehaviour
 
     public UnityEvent Death;
 
-
     private void Start()
     {
         health = maxHealth;
@@ -26,6 +25,7 @@ public class Health : MonoBehaviour
         Destroy(text, 1f);
 
         health -= damage;
+
         if (health <= 0)
         {
             Death.Invoke();
