@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+    private Health health;
+
     public GameObject gold;
     public GameObject heart;
 
@@ -14,6 +16,15 @@ public class Enemy : MonoBehaviour
     public int healthDrop;
 
     public Transform healthBar;
+
+    private Vector2 startPos;
+
+    private void Start()
+    {
+        health = GetComponent<Health>();
+        startPos = transform.position;
+        gameObject.SetActive(false);
+    }
 
     private void Update()
     {
@@ -42,6 +53,16 @@ public class Enemy : MonoBehaviour
         //experience
         GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().expAmount += experienceDrop;
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        transform.position = startPos;
+    }
+
+    public void Respawn()
+    {
+        if (gameObject.activeSelf == false)
+        {
+            health.health = health.maxHealth;
+            gameObject.SetActive(true);
+        }
     }
 }

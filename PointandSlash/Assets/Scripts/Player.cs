@@ -80,7 +80,6 @@ public class Player : MonoBehaviour
                 canBeHurt = true;
             }
         }
-
     }
 
     void StopDash()
@@ -115,7 +114,7 @@ public class Player : MonoBehaviour
 
     public void SetInvicibility(int damage)
     {
-        if(canBeHurt == true)
+        if(canBeHurt == true && isDashing == false)
         {
             health.TakeDamage(damage);
         }
@@ -133,6 +132,7 @@ public class Player : MonoBehaviour
         if (col.CompareTag("NPC") == true)
         {
             chatBox.SetActive(true);
+            chatBox.GetComponent<Animator>().SetTrigger("chat");
             col.GetComponent<NPC>().Speak();
         }
     }
@@ -142,7 +142,8 @@ public class Player : MonoBehaviour
         if (col.CompareTag("NPC") == true)
         {
             //col.GetComponent<NPC>().StopSpeak();
-            chatBox.SetActive(false);
+            //chatBox.SetActive(false);
+            chatBox.GetComponent<Animator>().SetTrigger("out");
         }
     }
 }

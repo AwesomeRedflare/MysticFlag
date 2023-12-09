@@ -39,7 +39,7 @@ public class Dash : MonoBehaviour
         }
         else
         {
-            dashCircle.fillAmount = targetStamina / dashTime;
+            dashCircle.fillAmount = 1- targetStamina / dashTime;
             targetStamina = Mathf.Lerp(targetStamina, timeBtwDash, circleSpeed * Time.deltaTime);
             timeBtwDash -= Time.deltaTime;
         }

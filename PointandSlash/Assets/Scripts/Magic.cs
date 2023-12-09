@@ -28,7 +28,7 @@ public class Magic : MonoBehaviour
         {
             manaAmount = manaAmount - manaCost;
 
-            GameObject projectile = Instantiate(fireBall, spawnPoint.position, transform.rotation).gameObject;
+            GameObject projectile = Instantiate(fireBall, spawnPoint.position, GetComponent<Player>().pivot.rotation).gameObject;
             projectile.GetComponent<FireBall>().damage = attackAmount;
 
         }
