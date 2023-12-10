@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3a621f2ef67efe34c9b515f14b4612f0
+guid: 1f3c6518e8d19e748ac38e9f4fd52e74
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,43 +117,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RPGcharacterSword_0
+      name: Pickups_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d14cbc1b50e3a2142aea75c00a80a6be
-      internalID: 951315510
+      spriteID: 8f9ea5179682c2f489926e6b5e26c0ae
+      internalID: 181737092
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RPGcharacterSword_1
+      name: Pickups_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 0
         width: 32
-        height: 64
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f18aaeb9c598321488b326b39d8508d6
-      internalID: 593016278
+      spriteID: 62c8a456186ffac44935a7460cfe6629
+      internalID: 1019429131
       vertices: []
       indices: 
       edges: []
@@ -169,8 +169,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      RPGcharacterSword_0: 951315510
-      RPGcharacterSword_1: 593016278
+      Pickups_1: 1019429131
+      Pickups_0: 181737092
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

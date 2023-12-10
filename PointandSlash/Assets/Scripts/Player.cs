@@ -29,9 +29,6 @@ public class Player : MonoBehaviour
     //Respawning
     public Transform spawnPoint;
 
-    //Expierence
-    public int expAmount;
-
     //HeartPickup
     public int heartValue;
 

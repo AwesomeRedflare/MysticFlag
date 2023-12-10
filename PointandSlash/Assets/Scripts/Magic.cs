@@ -11,6 +11,7 @@ public class Magic : MonoBehaviour
     public float maxMana;
     public float manaAmount;
     public float manaCost;
+    public float manaRegen;
     public float attackAmount;
 
     public Image manaBar;
@@ -24,6 +25,11 @@ public class Magic : MonoBehaviour
 
     private void Update()
     {
+        if(manaAmount <= maxMana)
+        {
+            manaAmount = manaAmount + manaRegen * Time.deltaTime;
+        }
+
         if (Input.GetKeyDown(KeyCode.X) && manaAmount >= manaCost)
         {
             manaAmount = manaAmount - manaCost;

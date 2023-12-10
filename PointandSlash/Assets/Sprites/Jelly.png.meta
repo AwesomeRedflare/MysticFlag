@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3a621f2ef67efe34c9b515f14b4612f0
+guid: 31ffd06f30882bf47a3361dddec0be1c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RPGcharacterSword_0
+      name: Jelly_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
-        height: 64
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d14cbc1b50e3a2142aea75c00a80a6be
-      internalID: 951315510
+      spriteID: 51f363dbe0bfdcf4a923e429b6b6378e
+      internalID: -472317282
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RPGcharacterSword_1
+      name: Jelly_1
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 32
+        width: 64
         height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cac8fc857a64864282391b1d006606d
+      internalID: 1315760265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jelly_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 64
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,8 +173,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f18aaeb9c598321488b326b39d8508d6
-      internalID: 593016278
+      spriteID: 36ee16d274a587647892b50fcdae6dbf
+      internalID: -353800249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jelly_3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef9be740b16a0c043a12448a0e2cb731
+      internalID: -1030446510
       vertices: []
       indices: 
       edges: []
@@ -169,8 +211,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      RPGcharacterSword_0: 951315510
-      RPGcharacterSword_1: 593016278
+      Jelly_2: -353800249
+      Jelly_3: 527633307
+      Jelly_0: -472317282
+      Jelly_1: 1315760265
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

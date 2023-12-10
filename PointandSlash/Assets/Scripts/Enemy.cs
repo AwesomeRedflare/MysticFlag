@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
         }
 
         //experience
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().expAmount += experienceDrop;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<ExpManager>().GetExp(experienceDrop);
 
         gameObject.SetActive(false);
         transform.position = startPos;

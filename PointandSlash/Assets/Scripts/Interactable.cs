@@ -16,6 +16,7 @@ public class Interactable : MonoBehaviour
     private void Start()
     {
         text = transform.GetChild(0).gameObject;
+        text.SetActive(false);
     }
 
     private void Update()
