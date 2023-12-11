@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public int healthDrop;
 
     public Transform healthBar;
+    public float offset;
 
     private Vector2 startPos;
 
@@ -29,7 +30,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         healthBar.rotation = Quaternion.identity;
-        healthBar.position = new Vector2(transform.position.x, transform.position.y + 1.2f);
+        healthBar.position = new Vector2(transform.position.x, transform.position.y + offset);
     }
 
     public void EnemyDeath()

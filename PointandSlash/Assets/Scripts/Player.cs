@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     public bool canBeHurt = true;
     public float damageTime;
     public float damageTimeStart;
+    public SpriteRenderer sp;
 
     //Respawning
     public Transform spawnPoint;
@@ -32,9 +34,16 @@ public class Player : MonoBehaviour
     //HeartPickup
     public int heartValue;
 
+    //other
+    public GameObject dashCircle;
+
+    //health text
+    public TextMeshProUGUI healthText;
+
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
+        sp = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
         cam = FindObjectOfType<Camera>();
         health = GetComponent<Health>();
         magic = GetComponent<Magic>();
@@ -74,9 +83,13 @@ public class Player : MonoBehaviour
 
             if(damageTime <= 0)
             {
+                sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0.5f);
                 canBeHurt = true;
             }
         }
+
+        //update health value on health bar
+        healthText.text = health.health.ToString();
     }
 
     void StopDash()
@@ -114,6 +127,7 @@ public class Player : MonoBehaviour
         if(canBeHurt == true && isDashing == false)
         {
             health.TakeDamage(damage);
+            sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0.5f);
         }
         rb.velocity = Vector2.zero;
 
@@ -122,6 +136,18 @@ public class Player : MonoBehaviour
             canBeHurt = false;
             damageTime = damageTimeStart;
         }
+    }
+
+    public void FindSword()
+    {
+        GetComponent<PlayerAttack>().enabled = true;
+        pivot.gameObject.SetActive(true);
+    }
+
+    public void FindDash()
+    {
+        dash.enabled = true;
+        dashCircle.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D col)

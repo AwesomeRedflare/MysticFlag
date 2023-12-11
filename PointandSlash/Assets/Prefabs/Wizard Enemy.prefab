@@ -597,6 +597,7 @@ MonoBehaviour:
   experienceDrop: 20
   healthDrop: 10
   healthBar: {fileID: 4540222719795994399}
+  offset: 1.25
 --- !u!114 &4540222720642080596
 MonoBehaviour:
   m_ObjectHideFlags: 0

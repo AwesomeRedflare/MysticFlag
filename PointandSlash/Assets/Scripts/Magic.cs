@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Magic : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Magic : MonoBehaviour
     public float attackAmount;
 
     public Image manaBar;
+    public TextMeshProUGUI manaText;
     private float targetMana;
     public float speed;
 
@@ -41,5 +43,7 @@ public class Magic : MonoBehaviour
 
         manaBar.fillAmount = targetMana / maxMana;
         targetMana = Mathf.Lerp(targetMana, manaAmount, speed * Time.deltaTime);
+
+        manaText.text = Mathf.FloorToInt(manaAmount).ToString();
     }
 }

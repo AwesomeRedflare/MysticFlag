@@ -30,6 +30,7 @@ public class Interactable : MonoBehaviour
                 if (canInteractAgain == false)
                 {
                     hasInteracted = true;
+                    text.GetComponent<Animator>().SetTrigger("out");
                 }
             }
         }
@@ -41,6 +42,7 @@ public class Interactable : MonoBehaviour
         if (col.CompareTag("Player") && hasInteracted == false)
         {
             text.SetActive(true);
+            text.GetComponent<Animator>().SetTrigger("in");
             player = col.gameObject;
         }
     }
@@ -49,14 +51,13 @@ public class Interactable : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            text.SetActive(false);
+            text.GetComponent<Animator>().SetTrigger("out");
             player = null;
         }
     }
 
-    public void FindSword()
+    public void Destroy()
     {
-        player.GetComponent<PlayerAttack>().enabled = true;
-        Debug.Log("you found a sword");
+        Destroy(gameObject);
     }
 }
