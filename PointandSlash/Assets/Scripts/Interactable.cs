@@ -31,6 +31,7 @@ public class Interactable : MonoBehaviour
                 {
                     hasInteracted = true;
                     text.GetComponent<Animator>().SetTrigger("out");
+                    player = null;
                 }
             }
         }
@@ -49,7 +50,7 @@ public class Interactable : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if (col.CompareTag("Player"))
+        if (col.CompareTag("Player") && hasInteracted == false)
         {
             text.GetComponent<Animator>().SetTrigger("out");
             player = null;

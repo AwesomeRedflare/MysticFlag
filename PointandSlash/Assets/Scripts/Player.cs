@@ -34,15 +34,15 @@ public class Player : MonoBehaviour
     //HeartPickup
     public int heartValue;
 
-    //other
-    public GameObject dashCircle;
-
     //health text
     public TextMeshProUGUI healthText;
 
+    //Animation
+    private Animator anim;
+
     void Start()
     {
-        sp = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         cam = FindObjectOfType<Camera>();
         health = GetComponent<Health>();
@@ -83,13 +83,23 @@ public class Player : MonoBehaviour
 
             if(damageTime <= 0)
             {
-                sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0.5f);
+                sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 1f);
                 canBeHurt = true;
             }
         }
 
         //update health value on health bar
         healthText.text = health.health.ToString();
+
+        //Animation
+        if(Vector2.Distance(transform.position, target.position) != 0)
+        {
+            anim.SetBool("moving", true);
+        }
+        else
+        {
+            anim.SetBool("moving", false);
+        }
     }
 
     void StopDash()
@@ -127,7 +137,7 @@ public class Player : MonoBehaviour
         if(canBeHurt == true && isDashing == false)
         {
             health.TakeDamage(damage);
-            sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0.5f);
+            sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0.75f);
         }
         rb.velocity = Vector2.zero;
 
@@ -136,18 +146,6 @@ public class Player : MonoBehaviour
             canBeHurt = false;
             damageTime = damageTimeStart;
         }
-    }
-
-    public void FindSword()
-    {
-        GetComponent<PlayerAttack>().enabled = true;
-        pivot.gameObject.SetActive(true);
-    }
-
-    public void FindDash()
-    {
-        dash.enabled = true;
-        dashCircle.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D col)

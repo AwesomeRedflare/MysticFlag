@@ -19,15 +19,19 @@ public class ExpManager : MonoBehaviour
 
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI AtkText;
-    public TextMeshProUGUI spdText;
+    //public TextMeshProUGUI spdText;
     public TextMeshProUGUI dshText;
     public TextMeshProUGUI mpText;
     public TextMeshProUGUI magText;
-    public TextMeshProUGUI rgnText;
+    //public TextMeshProUGUI rgnText;
 
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI expText;
     public TextMeshProUGUI nextExpText;
+
+    //other things I have to unlock
+    public GameObject dashCircle;
+    public GameObject manaBar;
 
     private void Start()
     {
@@ -59,26 +63,14 @@ public class ExpManager : MonoBehaviour
     {
         hpText.text = health.maxHealth.ToString();
         AtkText.text = attack.damage.ToString();
-        spdText.text = player.speed.ToString();
+        //spdText.text = player.speed.ToString();
         dshText.text = dash.dashTime.ToString();
         mpText.text = magic.maxMana.ToString();
         magText.text = magic.attackAmount.ToString();
-        rgnText.text = magic.manaRegen.ToString();
+        //rgnText.text = magic.manaRegen.ToString();
         levelText.text = level.ToString();
         expText.text = expAmount.ToString();
         nextExpText.text = expToNext.ToString();
-    }
-
-    public void UnlockDash()
-    {
-        dshText.gameObject.SetActive(true);
-    }
-
-    public void UnlockMagic()
-    {
-        mpText.gameObject.SetActive(true);
-        magText.gameObject.SetActive(true);
-        rgnText.gameObject.SetActive(true);
     }
 
     public void GetExp(int exp)
@@ -96,7 +88,7 @@ public class ExpManager : MonoBehaviour
         level++;
         health.maxHealth += 5;
         attack.damage += 5;
-        player.speed += 1;
+        //player.speed += 1;
         if(dash.enabled == true)
         {
             if(dash.dashTime >= 3)
@@ -108,9 +100,33 @@ public class ExpManager : MonoBehaviour
         {
             magic.maxMana += 5;
             magic.attackAmount += 5;
-            magic.manaRegen += 1;
+            //magic.manaRegen += 1;
         }
 
-        expToNext = expToNext + level * 10;
+        expToNext = 100 + level * 10;
+    }
+
+    //Unlocks
+
+    public void FindSword()
+    {
+        GetComponent<PlayerAttack>().enabled = true;
+        player.pivot.gameObject.SetActive(true);
+    }
+
+    public void UnlockDash()
+    {
+        GetComponent<Dash>().enabled = true;
+        dshText.gameObject.SetActive(true);
+        dashCircle.SetActive(true);
+    }
+
+    public void UnlockMagic()
+    {
+        GetComponent<Magic>().enabled = true;
+        manaBar.SetActive(true);
+        mpText.gameObject.SetActive(true);
+        magText.gameObject.SetActive(true);
+        //rgnText.gameObject.SetActive(true);
     }
 }

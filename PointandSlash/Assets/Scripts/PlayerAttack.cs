@@ -12,6 +12,9 @@ public class PlayerAttack : MonoBehaviour
     public float attackRange;
     public int damage;
 
+    //Animations
+    public Animator swordAnim;
+
     void Update()
     {
 
@@ -27,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Attack()
     {
-        //to do play animation refer to brackeys video
+        swordAnim.SetTrigger("attack");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemyLayer);
 
@@ -39,7 +42,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
