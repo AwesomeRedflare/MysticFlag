@@ -305,11 +305,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3d00a9b536442429ca4fc2d6d9ddc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 800
+  speed: 500
   range: 7
-  startTimeBtwAttack: 2
+  startTimeBtwAttack: 1.5
   isAttacking: 0
-  attackLenght: 0.75
+  attackLenght: 1
 --- !u!114 &697857931312958658
 MonoBehaviour:
   m_ObjectHideFlags: 0
