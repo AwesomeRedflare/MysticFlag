@@ -15,6 +15,7 @@ public class ExpManager : MonoBehaviour
     public int expToNext;
     private int level;
 
+    public GameObject levelUpText;
     public GameObject statBox;
 
     public TextMeshProUGUI hpText;
@@ -85,6 +86,9 @@ public class ExpManager : MonoBehaviour
 
     public void LevelUp()
     {
+        GameObject text = Instantiate(levelUpText, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
+        Destroy(text, 1f);
+
         level++;
         health.maxHealth += 5;
         attack.damage += 5;
@@ -93,7 +97,8 @@ public class ExpManager : MonoBehaviour
         {
             if(dash.dashTime >= 3)
             {
-                dash.dashTime *= 0.95f;
+                //dash.dashTime *= 0.95f;
+                dash.dashTime = Mathf.Round(dash.dashTime * 100f) / 100f;
             }
         }
         if (magic.enabled == true)
@@ -103,7 +108,7 @@ public class ExpManager : MonoBehaviour
             //magic.manaRegen += 1;
         }
 
-        expToNext = 100 + level * 10;
+        expToNext = expToNext + 100 + level * 10;
     }
 
     //Unlocks

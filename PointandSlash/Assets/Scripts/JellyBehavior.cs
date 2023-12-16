@@ -58,10 +58,16 @@ public class JellyBehavior : MonoBehaviour
                 rb.velocity = Vector2.zero;
                 timeBtwAttack = startTimeBtwAttack;
                 attackTimer = attackLenght;
+                enemy.TellOff();
             }
             else if (timeBtwAttack >= 0 && isAttacking == false)
             {
                 timeBtwAttack -= Time.deltaTime;
+
+                if (timeBtwAttack <= startTimeBtwAttack / 4)
+                {
+                    enemy.TellOn();
+                }
             }
 
             //attack which is basically a projectile

@@ -16,6 +16,8 @@ public class WizardBehavior : MonoBehaviour
     public float range;
     public float closeRange;
 
+    private Animator anim;
+
     //Attackin
     private float timeBtwAttack;
     public float startTimeBtwAttack;
@@ -23,6 +25,7 @@ public class WizardBehavior : MonoBehaviour
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         enemy = GetComponent<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player");
         timeBtwAttack = startTimeBtwAttack;
@@ -39,6 +42,7 @@ public class WizardBehavior : MonoBehaviour
         else
         {
             inRange = false;
+            anim.SetBool("moving", false);
         }
 
         if (Vector2.Distance(transform.position, player.transform.position) <= closeRange)
@@ -58,6 +62,7 @@ public class WizardBehavior : MonoBehaviour
             //checks to see if enemy can attack yet
             if (timeBtwAttack <= 0)
             {
+                enemy.TellOff();
                 Vector2 direction = player.transform.position - transform.position;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 Quaternion rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
@@ -72,7 +77,17 @@ public class WizardBehavior : MonoBehaviour
                 {
                     if(timeBtwAttack >= startTimeBtwAttack / 2)
                     {
+                        anim.SetBool("moving", true);
                         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, -speed * Time.deltaTime);
+
+                        if (timeBtwAttack <= startTimeBtwAttack / 4)
+                        {
+                            enemy.TellOn();
+                        }
+                    }
+                    else
+                    {
+                        anim.SetBool("moving", false);
                     }
                 }
                 timeBtwAttack -= Time.deltaTime;

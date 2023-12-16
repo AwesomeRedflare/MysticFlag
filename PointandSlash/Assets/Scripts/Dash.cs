@@ -13,6 +13,8 @@ public class Dash : MonoBehaviour
     public float dashTime;
     public float dashLenght;
 
+    public Color dashColor;
+
     //UI stuff
     private float targetStamina;
     public Image dashCircle;
@@ -29,11 +31,12 @@ public class Dash : MonoBehaviour
         if (timeBtwDash <= 0)
         {
             dashCircle.fillAmount = 1;
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.B))
             {
                 dashCircle.fillAmount = 0;
                 timeBtwDash = dashTime;
                 player.isDashing = true;
+                player.sp.color = dashColor;
                 Invoke("StopDash", dashLenght);
             }
         }
@@ -47,6 +50,7 @@ public class Dash : MonoBehaviour
 
     void StopDash()
     {
+        player.sp.color = Color.white;
         player.isDashing = false;
     }
 }

@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
 
     private Vector2 startPos;
 
+    public GameObject tell;
+
     private void Start()
     {
         health = GetComponent<Health>();
@@ -65,5 +67,16 @@ public class Enemy : MonoBehaviour
             health.health = health.maxHealth;
             gameObject.SetActive(true);
         }
+    }
+
+    //exclamation mark
+    public void TellOn()
+    {
+        tell.SetActive(true);
+    }
+
+    public void TellOff()
+    {
+        tell.SetActive(false);
     }
 }

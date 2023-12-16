@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    private GameObject player;
+    [HideInInspector]
+    public GameObject player;
     private GameObject text;
 
     public bool canInteractAgain;

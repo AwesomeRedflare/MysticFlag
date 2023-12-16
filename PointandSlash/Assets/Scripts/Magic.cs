@@ -32,7 +32,7 @@ public class Magic : MonoBehaviour
             manaAmount = manaAmount + manaRegen * Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.X) && manaAmount >= manaCost)
+        if ((Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.N)) && manaAmount >= manaCost)
         {
             manaAmount = manaAmount - manaCost;
 
