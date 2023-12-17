@@ -42,7 +42,6 @@ public class WizardBehavior : MonoBehaviour
         else
         {
             inRange = false;
-            anim.SetBool("moving", false);
         }
 
         if (Vector2.Distance(transform.position, player.transform.position) <= closeRange)
@@ -52,6 +51,7 @@ public class WizardBehavior : MonoBehaviour
         else
         {
             inCloseRange = false;
+            anim.SetBool("moving", false);
         }
 
         //when player is in range
@@ -79,16 +79,16 @@ public class WizardBehavior : MonoBehaviour
                     {
                         anim.SetBool("moving", true);
                         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, -speed * Time.deltaTime);
-
-                        if (timeBtwAttack <= startTimeBtwAttack / 4)
-                        {
-                            enemy.TellOn();
-                        }
                     }
                     else
                     {
                         anim.SetBool("moving", false);
                     }
+                }
+
+                if (timeBtwAttack <= startTimeBtwAttack / 4 && enemy.tell.activeSelf == false)
+                {
+                    enemy.TellOn();
                 }
                 timeBtwAttack -= Time.deltaTime;
             }

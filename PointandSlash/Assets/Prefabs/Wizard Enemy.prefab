@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageText: {fileID: 4711634037234548085, guid: 8adfbebdb2387d14c900d71773e77801, type: 3}
-  maxHealth: 50
+  maxHealth: 90
   health: 5
   Death:
     m_PersistentCalls:
@@ -444,9 +444,9 @@ MonoBehaviour:
   gold: {fileID: 7661054299003839122, guid: ead4f8c749e631f45a975cb62501ce50, type: 3}
   heart: {fileID: 6592121643125493445, guid: 896e1c9af7c49b54e82e23ab76ee7584, type: 3}
   attackDamage: 5
-  goldDrop: {x: -1, y: 4}
-  experienceDrop: 20
-  healthDrop: 10
+  goldDrop: {x: 2, y: 8}
+  experienceDrop: 25
+  healthDrop: 4
   healthBar: {fileID: 4540222719795994399}
   offset: 1.25
   tell: {fileID: 5697124292981659557}
@@ -594,8 +594,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5697124292981659557}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.87, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4540222720642080603}

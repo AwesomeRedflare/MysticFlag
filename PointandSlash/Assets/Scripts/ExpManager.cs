@@ -108,7 +108,7 @@ public class ExpManager : MonoBehaviour
             //magic.manaRegen += 1;
         }
 
-        expToNext = expToNext + 100 + level * 10;
+        expToNext = expToNext + 50 + level * 10;
     }
 
     //Unlocks

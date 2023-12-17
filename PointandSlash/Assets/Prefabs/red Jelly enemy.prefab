@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageText: {fileID: 4711634037234548085, guid: 8adfbebdb2387d14c900d71773e77801, type: 3}
-  maxHealth: 60
+  maxHealth: 90
   health: 5
   Death:
     m_PersistentCalls:
@@ -324,9 +324,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gold: {fileID: 7661054299003839122, guid: ead4f8c749e631f45a975cb62501ce50, type: 3}
   heart: {fileID: 6592121643125493445, guid: 896e1c9af7c49b54e82e23ab76ee7584, type: 3}
-  attackDamage: 15
+  attackDamage: 20
   goldDrop: {x: 2, y: 6}
-  experienceDrop: 20
+  experienceDrop: 25
   healthDrop: 10
   healthBar: {fileID: 697857930380659843}
   offset: 1

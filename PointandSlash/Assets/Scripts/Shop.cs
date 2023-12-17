@@ -24,7 +24,9 @@ public class Shop : MonoBehaviour
     {
         if(interactable.player.GetComponent<GoldManager>().goldAmount >= price)
         {
-            interactable.player.GetComponent<GoldManager>().goldAmount -= price;
+            GoldManager gold = interactable.player.GetComponent<GoldManager>();
+            gold.goldAmount -= price;
+            gold.goldText.text = "Gold x " + gold.goldAmount;
             itemEffect.Invoke();
             Destroy(gameObject);
         }

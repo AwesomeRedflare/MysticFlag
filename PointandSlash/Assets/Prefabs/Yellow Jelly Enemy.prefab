@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageText: {fileID: 4711634037234548085, guid: 8adfbebdb2387d14c900d71773e77801, type: 3}
-  maxHealth: 30
+  maxHealth: 45
   health: 5
   Death:
     m_PersistentCalls:
@@ -389,11 +389,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3d00a9b536442429ca4fc2d6d9ddc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1000
+  speed: 600
   range: 10
   startTimeBtwAttack: 1
   isAttacking: 0
-  attackLenght: 0.3
+  attackLenght: 0.4
 --- !u!114 &697857931312958658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,10 +408,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gold: {fileID: 7661054299003839122, guid: ead4f8c749e631f45a975cb62501ce50, type: 3}
   heart: {fileID: 6592121643125493445, guid: 896e1c9af7c49b54e82e23ab76ee7584, type: 3}
-  attackDamage: 15
+  attackDamage: 5
   goldDrop: {x: -1, y: 4}
   experienceDrop: 15
-  healthDrop: 10
+  healthDrop: 7
   healthBar: {fileID: 697857930380659843}
   offset: 1
   tell: {fileID: 483735484525488918}
