@@ -21,8 +21,8 @@ public class CamMove : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void ChangeSize(int size)
     {
-
+        GetComponent<Camera>().orthographicSize = size;
     }
 }

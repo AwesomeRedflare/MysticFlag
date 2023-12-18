@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 600
-  range: 10
+  range: 5
   startTimeBtwAttack: 1
   isAttacking: 0
   attackLenght: 0.4

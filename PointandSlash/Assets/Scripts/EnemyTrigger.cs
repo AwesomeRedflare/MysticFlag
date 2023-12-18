@@ -6,6 +6,14 @@ public class EnemyTrigger : MonoBehaviour
 {
     public Enemy[] enemies;
 
+    private void Start()
+    {
+        foreach (Enemy e in enemies)
+        {
+            e.gameObject.SetActive(false);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))

@@ -90,7 +90,7 @@ public class ExpManager : MonoBehaviour
         Destroy(text, 1f);
 
         level++;
-        health.maxHealth += 5;
+        health.maxHealth += 10;
         attack.damage += 5;
         //player.speed += 1;
         if(dash.enabled == true)

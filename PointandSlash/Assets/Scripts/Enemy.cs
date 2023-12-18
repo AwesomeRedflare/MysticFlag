@@ -26,7 +26,6 @@ public class Enemy : MonoBehaviour
     {
         health = GetComponent<Health>();
         startPos = transform.position;
-        gameObject.SetActive(false);
     }
 
     private void Update()
