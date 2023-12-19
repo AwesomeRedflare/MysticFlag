@@ -37,6 +37,17 @@ public class Shop : MonoBehaviour
         interactable.player.GetComponent<Player>().heartValue *= 2;
     }
 
+    public void ExtraHealth()
+    {
+        interactable.player.GetComponent<Health>().maxHealth += 50;
+        interactable.player.GetComponent<Health>().HealHealth(50);
+    }
+
+    public void SpeedBoost()
+    {
+        interactable.player.GetComponent<Player>().speed += 5;
+    }
+
     public void ManaRegenIncrease()
     {
         interactable.player.GetComponent<Magic>().manaRegen += 2;

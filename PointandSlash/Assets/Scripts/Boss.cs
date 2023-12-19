@@ -7,23 +7,38 @@ public class Boss : MonoBehaviour
     private Enemy enemy;
     private Health health;
     private Rigidbody2D rb;
+    private BoxCollider2D boxcol;
     private GameObject player;
 
-    public float chargeAttackWait;
-    public float chargeSpeed;
     public float tellTime;
 
-    public bool facePlayer = false;
+    //charge attack
+    public int minCharge, maxCharge;
+    public float chargeAttackWait;
+    public float chargeSpeed;
+    public int chargeCount;
     public bool isChargeAttack;
+    public bool facePlayer = false;
+
+    //ProjectileAttack
+    public GameObject projectile;
+    public Transform[] projSpawn;
+    public int spawnAmount;
+    public float spawnRate;
+
+    //Retreat
+    public Transform retreatPoint;
+    public float moveSpeed;
 
     private void Start()
     {
         enemy = GetComponent<Enemy>();
         health = GetComponent<Health>();
         rb = GetComponent<Rigidbody2D>();
+        boxcol = GetComponent<BoxCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
 
-        StartCoroutine("ChargeAttack");
+        StartCycle();
     }
 
     private void Update()
@@ -47,20 +62,53 @@ public class Boss : MonoBehaviour
         transform.rotation = rotation;
     }
 
-    public void StartBoss()
+    public void StartCycle()
     {
+        chargeCount = Random.Range(minCharge, maxCharge + 1);
         StartCoroutine("ChargeAttack");
+    }
+
+    IEnumerator Retreat()
+    {
+        Debug.Log("Retreat");
+        boxcol.enabled = false;
+        transform.rotation = Quaternion.identity;
+
+        while(transform.position != retreatPoint.position)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, retreatPoint.position, moveSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        StartCoroutine("RainAttack");
+    }
+
+    IEnumerator BackToStage()
+    {
+        Debug.Log("Backtostage");
+        while (transform.position != transform.parent.position)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, transform.parent.position, moveSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        boxcol.enabled = true;
+        StartCycle();
     }
 
     IEnumerator ChargeAttack()
     {
-        facePlayer = true;
-
-        for (int i = 0; i < Random.Range(3f, 5f); i++)
+        Debug.Log("charge");
+        if (chargeCount > 0)
         {
-            yield return new WaitForSeconds(chargeAttackWait - tellTime);
+            chargeCount -= 1;
 
             facePlayer = true;
+
+            yield return new WaitForSeconds(chargeAttackWait - tellTime);
+
             enemy.TellOn();
 
             yield return new WaitForSeconds(tellTime);
@@ -69,7 +117,28 @@ public class Boss : MonoBehaviour
 
             facePlayer = false;
             isChargeAttack = true;
+
+            yield break;
         }
+        else if(chargeCount <= 0)
+        {
+            StartCoroutine("Retreat");
+        }
+    }
+
+    IEnumerator RainAttack()
+    {
+        Debug.Log("rain");
+        for (int i = 0; i < spawnAmount; i++)
+        {
+            int spawn = Random.Range(0, projSpawn.Length);
+
+            Instantiate(projectile, projSpawn[spawn].position, projSpawn[spawn].rotation);
+
+            yield return new WaitForSeconds(spawnRate);
+        }
+
+        StartCoroutine("BackToStage");
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -81,10 +150,11 @@ public class Boss : MonoBehaviour
             pla.SetInvicibility((int)enemy.attackDamage);
         }
 
-        if (col.gameObject.CompareTag("Wall"))
+        if (col.gameObject.CompareTag("Wall") && isChargeAttack == true)
         {
             isChargeAttack = false;
             rb.velocity = Vector2.zero;
+            StartCoroutine("ChargeAttack");
         }
 
     }
