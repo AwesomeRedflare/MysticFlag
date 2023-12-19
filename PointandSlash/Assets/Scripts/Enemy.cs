@@ -28,6 +28,12 @@ public class Enemy : MonoBehaviour
         startPos = transform.position;
     }
 
+    private void OnEnable()
+    {
+        health = GetComponent<Health>();
+        startPos = transform.position;
+    }
+
     private void Update()
     {
         healthBar.rotation = Quaternion.identity;

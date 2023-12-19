@@ -19,6 +19,7 @@ public class Boss : MonoBehaviour
     public int chargeCount;
     public bool isChargeAttack;
     public bool facePlayer = false;
+    private Vector2 direction;
 
     //ProjectileAttack
     public GameObject projectile;
@@ -29,6 +30,14 @@ public class Boss : MonoBehaviour
     //Retreat
     public Transform retreatPoint;
     public float moveSpeed;
+
+    //Spawning Enemies
+    public Transform[] enemySpawnPoints;
+    public GameObject[] enemies;
+    private List<GameObject> aliveEnemies = new List<GameObject>();
+    //public int enemySpawnAmount;
+    public float enemySpawnRate;
+    //private bool hasSpawnedEnemies = false;
 
     private void Start()
     {
@@ -50,7 +59,7 @@ public class Boss : MonoBehaviour
 
         if (isChargeAttack)
         {
-            rb.velocity = transform.up * chargeSpeed * Time.fixedDeltaTime;
+            rb.velocity = direction.normalized * chargeSpeed * Time.fixedDeltaTime;
         }
     }
 
@@ -68,6 +77,7 @@ public class Boss : MonoBehaviour
         StartCoroutine("ChargeAttack");
     }
 
+    /*
     IEnumerator Retreat()
     {
         Debug.Log("Retreat");
@@ -95,8 +105,10 @@ public class Boss : MonoBehaviour
         }
 
         boxcol.enabled = true;
+
         StartCycle();
     }
+    */
 
     IEnumerator ChargeAttack()
     {
@@ -115,6 +127,8 @@ public class Boss : MonoBehaviour
 
             enemy.TellOff();
 
+            direction = player.transform.position - transform.position;
+
             facePlayer = false;
             isChargeAttack = true;
 
@@ -122,12 +136,38 @@ public class Boss : MonoBehaviour
         }
         else if(chargeCount <= 0)
         {
-            StartCoroutine("Retreat");
+            if (health.health <= health.maxHealth / 2)
+            {
+                int chance = Random.Range(0, 2);
+                if(chance == 1)
+                {
+                    StartCoroutine("SpawnEnemies");
+                }
+                else
+                {
+                    StartCoroutine("RainAttack");
+                }
+            }
+            else
+            {
+                StartCoroutine("RainAttack");
+            }
         }
     }
 
     IEnumerator RainAttack()
     {
+        //Debug.Log("Retreat");
+        boxcol.enabled = false;
+        transform.rotation = Quaternion.identity;
+
+        while (transform.position != retreatPoint.position)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, retreatPoint.position, moveSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+
         Debug.Log("rain");
         for (int i = 0; i < spawnAmount; i++)
         {
@@ -138,7 +178,109 @@ public class Boss : MonoBehaviour
             yield return new WaitForSeconds(spawnRate);
         }
 
-        StartCoroutine("BackToStage");
+        //Debug.Log("Backtostage");
+        while (transform.position != transform.parent.position)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, transform.parent.position, moveSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        boxcol.enabled = true;
+
+        chargeCount = Random.Range(minCharge, maxCharge + 1);
+
+        if (health.health <= health.maxHealth / 2)
+        {
+            int chance = Random.Range(0, 3);
+            if (chance == 1)
+            {
+                StartCoroutine("SpawnEnemies");
+            }
+            else
+            {
+                StartCoroutine("ChargeAttack");
+            }
+        }
+        else
+        {
+            StartCoroutine("ChargeAttack");
+        }
+    }
+
+    IEnumerator SpawnEnemies()
+    {
+        Debug.Log("spawn enemies");
+
+        //Retreats to the top
+        boxcol.enabled = false;
+        transform.rotation = Quaternion.identity;
+
+        while (transform.position != retreatPoint.position)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, retreatPoint.position, moveSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        //spawns the enemies
+
+        int spawn = 0;
+
+        for (int i = 0; i < enemySpawnPoints.Length; i++)
+        {
+            GameObject e = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[spawn].position, Quaternion.identity, transform.parent);
+
+            aliveEnemies.Add(e);
+
+            if(spawn < enemySpawnPoints.Length)
+            {
+                Debug.Log(spawn);
+                spawn += 1;
+            }
+
+            if(spawn >= enemySpawnPoints.Length)
+            {
+                Debug.Log("reset");
+                spawn = 0;
+            }
+
+            yield return new WaitForSeconds(enemySpawnRate);
+        }
+
+        while(aliveEnemies.Count > 0)
+        {
+            foreach (GameObject en in aliveEnemies)
+            {
+                if (en.activeSelf == false)
+                {
+                    aliveEnemies.Remove(en);
+                    break;
+                }
+            }
+            yield return null;
+        }
+
+        //Debug.Log("Backtostage");
+        while (transform.position != transform.parent.position)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, transform.parent.position, moveSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        boxcol.enabled = true;
+
+        int chance = Random.Range(0, 3);
+        if (chance == 1)
+        {
+            StartCoroutine("RainAttack");
+        }
+        else
+        {
+            chargeCount = Random.Range(minCharge, maxCharge + 1);
+            StartCoroutine("ChargeAttack");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col)

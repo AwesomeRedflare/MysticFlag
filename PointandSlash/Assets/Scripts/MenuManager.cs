@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     public void Button(string s)
     {
         transition.SetActive(true);
+        transition.GetComponent<Animator>().SetTrigger("on");
         sceneName = s;
         Invoke("GoToScene", 0.5f);
     }
