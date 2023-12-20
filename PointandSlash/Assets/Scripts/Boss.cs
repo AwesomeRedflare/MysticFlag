@@ -47,7 +47,7 @@ public class Boss : MonoBehaviour
         boxcol = GetComponent<BoxCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
 
-        StartCycle();
+        //StartCycle();
     }
 
     private void Update()

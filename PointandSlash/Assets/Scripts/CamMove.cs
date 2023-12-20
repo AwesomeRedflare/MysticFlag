@@ -5,11 +5,15 @@ using UnityEngine;
 public class CamMove : MonoBehaviour
 {
     public Transform player;
+    private Camera cam;
+
+    public float zoomSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        cam = GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -23,6 +27,15 @@ public class CamMove : MonoBehaviour
 
     public void ChangeSize(int size)
     {
-        GetComponent<Camera>().orthographicSize = size;
+        StartCoroutine("CameraZoom", size);
+    }
+
+    IEnumerator CameraZoom(int s)
+    {
+        while(cam.orthographicSize != s)
+        {
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, s, zoomSpeed * Time.deltaTime);
+            yield return null;
+        }
     }
 }
