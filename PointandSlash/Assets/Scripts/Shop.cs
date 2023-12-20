@@ -45,7 +45,7 @@ public class Shop : MonoBehaviour
 
     public void SpeedBoost()
     {
-        interactable.player.GetComponent<Player>().speed += 5;
+        interactable.player.GetComponent<Player>().speed += 3;
     }
 
     public void ManaRegenIncrease()

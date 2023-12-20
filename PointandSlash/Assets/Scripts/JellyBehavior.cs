@@ -30,6 +30,11 @@ public class JellyBehavior : MonoBehaviour
         timeBtwAttack = startTimeBtwAttack;
     }
 
+    private void OnEnable()
+    {
+        inRange = false;
+    }
+
     private void Update()
     {
         //checks to see if inrange

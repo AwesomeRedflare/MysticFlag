@@ -466,8 +466,8 @@ MonoBehaviour:
   evilBall: {fileID: 5139530505793506934, guid: 94ca2c3989ff9094aadb72b8ad0c08d3, type: 3}
   speed: 2
   range: 12
-  closeRange: 4
-  startTimeBtwAttack: 4
+  closeRange: 6
+  startTimeBtwAttack: 2.5
 --- !u!1 &4540222721116178953
 GameObject:
   m_ObjectHideFlags: 0

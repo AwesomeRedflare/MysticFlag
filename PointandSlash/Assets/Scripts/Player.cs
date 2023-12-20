@@ -110,10 +110,22 @@ public class Player : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("GameOver");
-        health.health = health.maxHealth;
-        magic.manaAmount = magic.maxMana;
+        RestoreStats();
         transform.position = spawnPoint.position;
         target.position = spawnPoint.position;
+    }
+
+    void RestoreStats()
+    {
+        health.health = health.maxHealth;
+        magic.manaAmount = magic.maxMana;
+    }
+
+    public void Teleport(Transform point)
+    {
+        RestoreStats();
+        transform.position = point.position;
+        target.position = point.position;
     }
 
 

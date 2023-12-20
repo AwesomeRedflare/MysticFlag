@@ -11,8 +11,7 @@ public class Teleporter : MonoBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             Player p = col.GetComponent<Player>();
-            p.spawnPoint = spawnPoint;
-            p.GameOver();
+            p.Teleport(spawnPoint);
         }
     }
 }

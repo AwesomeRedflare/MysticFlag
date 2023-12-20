@@ -7,7 +7,7 @@ public class Boss : MonoBehaviour
     private Enemy enemy;
     private Health health;
     private Rigidbody2D rb;
-    private BoxCollider2D boxcol;
+    private PolygonCollider2D boxcol;
     private GameObject player;
 
     public float tellTime;
@@ -44,7 +44,7 @@ public class Boss : MonoBehaviour
         enemy = GetComponent<Enemy>();
         health = GetComponent<Health>();
         rb = GetComponent<Rigidbody2D>();
-        boxcol = GetComponent<BoxCollider2D>();
+        boxcol = GetComponent<PolygonCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
 
         //StartCycle();
@@ -52,10 +52,12 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
+        /*
         if(facePlayer == true)
         {
             FacePlayer();
         }
+        */
 
         if (isChargeAttack)
         {

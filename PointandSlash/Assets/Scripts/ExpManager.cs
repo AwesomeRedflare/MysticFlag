@@ -97,7 +97,7 @@ public class ExpManager : MonoBehaviour
         {
             if(dash.dashTime >= 3)
             {
-                //dash.dashTime *= 0.95f;
+                dash.dashTime *= 0.95f;
                 dash.dashTime = Mathf.Round(dash.dashTime * 100f) / 100f;
             }
         }
