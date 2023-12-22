@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
+        TellOff();
         health = GetComponent<Health>();
         startPos = transform.position;
     }
@@ -42,6 +43,8 @@ public class Enemy : MonoBehaviour
 
     public void EnemyDeath()
     {
+        //FindObjectOfType<AudioManager>().Play("enemyDeath");
+
         //gold 
         float goldAmount = Random.Range(goldDrop.x, goldDrop.y);
         for (int i = 0; i < goldAmount; i++)

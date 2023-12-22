@@ -11,6 +11,7 @@ public class FireBall : MonoBehaviour
 
     private void Start()
     {
+        //FindObjectOfType<AudioManager>().Play("shoot");
         rb = GetComponent<Rigidbody2D>();
     }
 

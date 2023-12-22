@@ -27,6 +27,7 @@ public class CamMove : MonoBehaviour
 
     public void ChangeSize(int size)
     {
+        StopAllCoroutines();
         StartCoroutine("CameraZoom", size);
     }
 

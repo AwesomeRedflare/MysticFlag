@@ -13,6 +13,7 @@ public class GoldManager : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Gold"))
         {
+            //FindObjectOfType<AudioManager>().Play("pickup1");
             Destroy(col.gameObject);
             AddGold();
         }

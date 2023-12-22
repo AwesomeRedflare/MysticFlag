@@ -34,10 +34,10 @@ public class Boss : MonoBehaviour
     //Spawning Enemies
     public Transform[] enemySpawnPoints;
     public GameObject[] enemies;
-    private List<GameObject> aliveEnemies = new List<GameObject>();
+    public List<GameObject> aliveEnemies = new List<GameObject>();
     //public int enemySpawnAmount;
     public float enemySpawnRate;
-    //private bool hasSpawnedEnemies = false;
+    private bool hasSpawnedEnemies = false;
 
     private void Start()
     {
@@ -50,15 +50,8 @@ public class Boss : MonoBehaviour
         //StartCycle();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        /*
-        if(facePlayer == true)
-        {
-            FacePlayer();
-        }
-        */
-
         if (isChargeAttack)
         {
             rb.velocity = direction.normalized * chargeSpeed * Time.fixedDeltaTime;
@@ -77,6 +70,22 @@ public class Boss : MonoBehaviour
     {
         chargeCount = Random.Range(minCharge, maxCharge + 1);
         StartCoroutine("ChargeAttack");
+    }
+
+    public void RestartBattle()
+    {
+        foreach (GameObject e in aliveEnemies)
+        {
+            Destroy(e);
+        }
+        aliveEnemies.Clear();
+        health.health = health.maxHealth;
+        isChargeAttack = false;
+        rb.velocity = Vector2.zero;
+        hasSpawnedEnemies = false;
+        transform.position = transform.parent.position;
+        boxcol.enabled = true;
+        StopAllCoroutines();
     }
 
     /*
@@ -140,6 +149,13 @@ public class Boss : MonoBehaviour
         {
             if (health.health <= health.maxHealth / 2)
             {
+                if(hasSpawnedEnemies == false)
+                {
+                    StartCoroutine("SpawnEnemies");
+                    hasSpawnedEnemies = true;
+                    yield break;
+                }
+
                 int chance = Random.Range(0, 2);
                 if(chance == 1)
                 {
@@ -194,6 +210,13 @@ public class Boss : MonoBehaviour
 
         if (health.health <= health.maxHealth / 2)
         {
+            if (hasSpawnedEnemies == false)
+            {
+                StartCoroutine("SpawnEnemies");
+                hasSpawnedEnemies = true;
+                yield break;
+            }
+
             int chance = Random.Range(0, 3);
             if (chance == 1)
             {
@@ -296,6 +319,12 @@ public class Boss : MonoBehaviour
 
         if (col.gameObject.CompareTag("Wall") && isChargeAttack == true)
         {
+            if(Vector2.Distance(player.transform.position, gameObject.transform.position) > 100)
+            {
+
+                RestartBattle();
+                return;
+            }
             isChargeAttack = false;
             rb.velocity = Vector2.zero;
             StartCoroutine("ChargeAttack");

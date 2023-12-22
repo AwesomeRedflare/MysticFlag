@@ -80,7 +80,6 @@ public class JellyBehavior : MonoBehaviour
             {
                 if(attackTimer >= 0)
                 {
-                    rb.velocity = transform.up * speed * Time.fixedDeltaTime;
                     attackTimer -= Time.deltaTime;
                 }
                 else
@@ -88,6 +87,22 @@ public class JellyBehavior : MonoBehaviour
                     rb.velocity = Vector2.zero;
                     isAttacking = false;
                 }
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        //attack which is basically a projectile
+        if (isAttacking == true)
+        {
+            if (attackTimer >= 0)
+            {
+                rb.velocity = transform.up * speed * Time.fixedDeltaTime;
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
             }
         }
     }

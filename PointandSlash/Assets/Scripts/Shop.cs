@@ -54,7 +54,7 @@ public class Shop : MonoBehaviour
     }
     public void DashMultiplier()
     {
-        interactable.player.GetComponent<Dash>().speedMultiplier += 1;
+        interactable.player.GetComponent<Dash>().dashLenght += 1;
     }
 
 }

@@ -439,33 +439,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Point and Slash
-
-
-    Made by
-
-    AwesomeRedflare
-
-
-    For
-
-    Secret
-    Santa Jam 2023
-
-
-    To my giftee
-
-    Retro Paul
-
-
-
-    I hope you enjoyed!
-
-
-
-
-    Thanks
-    for playing!'
+  m_text: "Mystic Flag \n\nMade by\nAwesomeRedflare\n\nFor\nSecret Santa Jam 2023\n\nTo
+    my giftee\nRetro Paul\n\n\nI hope you enjoyed!\n\n\n\nand thanks for playing!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 70549cbe71b68624398f3d917c04776e, type: 2}
   m_sharedMaterial: {fileID: 1740589775430957377, guid: 70549cbe71b68624398f3d917c04776e, type: 2}

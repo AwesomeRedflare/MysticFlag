@@ -133,6 +133,7 @@ public class Player : MonoBehaviour
     {
         if (col.transform.CompareTag("Heart"))
         {
+            //FindObjectOfType<AudioManager>().Play("heart");
             health.HealHealth(heartValue);
             Destroy(col.gameObject);
         }

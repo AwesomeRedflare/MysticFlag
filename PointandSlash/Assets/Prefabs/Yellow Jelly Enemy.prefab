@@ -408,7 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gold: {fileID: 7661054299003839122, guid: ead4f8c749e631f45a975cb62501ce50, type: 3}
   heart: {fileID: 6592121643125493445, guid: 896e1c9af7c49b54e82e23ab76ee7584, type: 3}
-  attackDamage: 5
+  attackDamage: 15
   goldDrop: {x: -1, y: 4}
   experienceDrop: 15
   healthDrop: 7
